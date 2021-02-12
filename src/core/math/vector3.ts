@@ -35,6 +35,20 @@ namespace hyperEngine {
             this._z = value;
         }
 
+        public set(x?: number, y?: number, z?: number): void {
+            if (x !== undefined) {
+                this._x = x;
+            }
+
+            if (y !== undefined) {
+                this._y = y;
+            }
+
+            if (z !== undefined) {
+                this._z = z;
+            }
+        }
+
         public static get zero(): Vector3 {
             return new Vector3();
         }
