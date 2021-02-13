@@ -1,52 +1,10 @@
 namespace hyperEngine {
-    export class Rectangle {
-        protected _width: number;
-        protected _height: number;
-        protected _origin: Vector3 = Vector3.zero;
-        protected _buffer: GLBuffer;
-        protected _vertices: Vertex[] = [];
-
+    export class Rectangle extends Primitive2D {
         constructor(width: number = 100, height: number = 100) {
-            this._width = width;
-            this._height = height;
+            super(width, height);
             this.load();
         }
-
-        public get origin(): Vector3 {
-            return this._origin;
-        }
-
-        public set origin(value: Vector3) {
-            this._origin = value;
-            this.recalculateVertices();
-        }
-
-        public destroy(): void {
-            this._buffer.destroy();
-        }
-
-        public load(): void {
-            this._buffer = new GLBuffer();
-            // add attributes
-            let positionAttribute = new AttributeInfo();
-            positionAttribute.location = 0;
-            positionAttribute.size = 3; // x, y, z
-            this._buffer.addAttributeLocation(positionAttribute);
-
-            this.calculateVertices();
-        }
-
-        public update(time: number): void {}
-
-        public draw(shader: Shader, model: Matrix4): void {
-            let modelLocation = shader.getUniformLocation('u_model');
-            model = Matrix4.identity();
-            gl.uniformMatrix4fv(modelLocation, false, model.toFloat32Array());
-
-            this._buffer.bind();
-            this._buffer.draw();
-        }
-
+        
         protected calculateVertices(): void {
             // new coordinated for origin
             let minX = -(this._width * this._origin.x);
