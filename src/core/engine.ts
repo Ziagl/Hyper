@@ -14,9 +14,8 @@ namespace hyperEngine {
             this._basicShader.use();
 
             // load object
-            this._rectangle = new Rectangle(0.5, 0.5);
-            this._rectangle.origin = new Vector3(1.0, 1.0);
-            this._triangle = new Triangle(0.5, 0.5);
+            this._rectangle = new Rectangle();
+            this._triangle = new Triangle();
 
             this._projection = Matrix4.orthographic(
                 0,
@@ -71,8 +70,6 @@ namespace hyperEngine {
             let projectionPosition = this._basicShader.getUniformLocation(
                 'u_projection'
             );
-            //###todo set projection matrix to identity matrix
-            this._projection = Matrix4.identity();
             gl.uniformMatrix4fv(
                 projectionPosition,
                 false,
