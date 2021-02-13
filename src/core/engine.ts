@@ -68,14 +68,16 @@ namespace hyperEngine {
             gl.clear(gl.COLOR_BUFFER_BIT);
 
             // set uniforms
-            /*let projectionPosition = this._basicShader.getUniformLocation(
+            let projectionPosition = this._basicShader.getUniformLocation(
                 'u_projection'
             );
+            //###todo set projection matrix to identity matrix
+            this._projection = Matrix4.identity();
             gl.uniformMatrix4fv(
                 projectionPosition,
                 false,
                 new Float32Array(this._projection.data)
-            );*/
+            );
 
             this._rectangle.draw(this._basicShader, this._projection);
             this._triangle.draw(this._basicShader, this._projection);

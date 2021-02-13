@@ -39,8 +39,8 @@ namespace hyperEngine {
         public update(time: number): void {}
 
         public draw(shader: Shader, model: Matrix4): void {
-            //let modelLocation = shader.getUniformLocation('u_model');
-            //gl.uniformMatrix4fv(modelLocation, false, model.toFloat32Array());
+            let modelLocation = shader.getUniformLocation('u_model');
+            gl.uniformMatrix4fv(modelLocation, false, model.toFloat32Array());
 
             this._buffer.bind();
             this._buffer.draw();

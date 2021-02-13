@@ -78,7 +78,7 @@ namespace hyperEngine {
             this._program = this.createProgram(vertexShader, fragmentShader);
 
             this.detectAttributes();
-            //this.detectUniforms();
+            this.detectUniforms();
         }
 
         private loadShader(source: string, shaderType: number): WebGLShader {
