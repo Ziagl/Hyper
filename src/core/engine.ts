@@ -3,16 +3,20 @@ namespace hyperEngine {
         private _canvas: HTMLCanvasElement;
         private _projection: Matrix4;
         private _basicShader: BasicShader;
+        private _colorShader: ColorShader;
         private _rectangle: Rectangle;
         private _triangle: Triangle;
+        private _scene: Scene;
 
         constructor() {
             this._canvas = GLUtilities.initialize();
 
             // load shader
             this._basicShader = new BasicShader();
-            this._basicShader.use();
+            this._colorShader = new ColorShader();
 
+            // create scene
+            //this._scene = new Scene();
             // load object
             this._rectangle = new Rectangle();
             this._triangle = new Triangle();
@@ -66,6 +70,9 @@ namespace hyperEngine {
         private draw(): void {
             gl.clear(gl.COLOR_BUFFER_BIT);
 
+            // draw everything with basic shader
+            this._basicShader.use();
+
             // set uniforms
             let projectionPosition = this._basicShader.getUniformLocation(
                 'u_projection'
@@ -77,7 +84,21 @@ namespace hyperEngine {
             );
 
             this._rectangle.draw(this._basicShader, this._projection);
-            this._triangle.draw(this._basicShader, this._projection);
+
+            // draw everything with color shader
+            this._colorShader.use();
+
+            // set uniforms
+            projectionPosition = this._colorShader.getUniformLocation(
+                'u_projection'
+            );
+            gl.uniformMatrix4fv(
+                projectionPosition,
+                false,
+                new Float32Array(this._projection.data)
+            );
+
+            this._triangle.draw(this._colorShader, this._projection);
         }
     }
 }

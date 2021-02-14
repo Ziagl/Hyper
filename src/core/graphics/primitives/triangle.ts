@@ -6,6 +6,23 @@ namespace hyperEngine {
             this.load();
         }
 
+        public load(): void {
+            this._buffer = new GLBuffer();
+            // add attributes
+            let positionAttribute = new AttributeInfo();
+            positionAttribute.location = 0;
+            positionAttribute.size = 3; // x, y, z
+            this._buffer.addAttributeLocation(positionAttribute);
+
+            // add attributes
+            let colorAttribute = new AttributeInfo();
+            colorAttribute.location = 1;
+            colorAttribute.size = 4; // r, g, b, a
+            this._buffer.addAttributeLocation(colorAttribute);
+
+            this.calculateVertices();
+        }
+
         protected calculateVertices(): void {
             // new coordinated for origin
             let minX = -(this._width * this._origin.x);
@@ -16,14 +33,14 @@ namespace hyperEngine {
 
             // add vertex data
             this._vertices = [
-                // x y z u v
-                new Vertex(minX, minY, 0),
-                new Vertex(maxX, minY, 0),
-                new Vertex(maxX / 2, maxY, 0),
+                // x y z r g b a
+                new Vertex(minX, minY, 0, 0, 0, 1, 0, 0, 1),
+                new Vertex(maxX, minY, 0, 0, 0, 0, 1, 0, 1),
+                new Vertex(maxX / 2, maxY, 0, 0, 0, 0, 0, 1, 1),
             ];
 
             for (let v of this._vertices) {
-                this._buffer.pushBackData(v.toArray());
+                this._buffer.pushBackData(v.toArrayWithColor());
             }
             this._buffer.upload();
             this._buffer.unbind();
@@ -43,7 +60,7 @@ namespace hyperEngine {
 
             this._buffer.clearData();
             for (let v of this._vertices) {
-                this._buffer.pushBackData(v.toArray());
+                this._buffer.pushBackData(v.toArrayWithColor());
             }
             this._buffer.upload();
             this._buffer.unbind();

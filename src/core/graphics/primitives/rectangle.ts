@@ -4,7 +4,7 @@ namespace hyperEngine {
             super(width, height);
             this.load();
         }
-        
+
         protected calculateVertices(): void {
             // new coordinated for origin
             let minX = -(this._width * this._origin.x);
@@ -15,7 +15,7 @@ namespace hyperEngine {
 
             // add vertex data
             this._vertices = [
-                // x y z u v
+                // x y z
                 new Vertex(minX, minY, 0),
                 new Vertex(maxX, minY, 0),
                 new Vertex(minX, maxY, 0),
