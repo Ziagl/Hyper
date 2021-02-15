@@ -5,7 +5,7 @@ namespace hyperEngine {
         private _parent: Entity;
         private _isLoaded: boolean = false;
         private _scene: Scene;
-        //private _components:IComponent[] = [];
+        private _components:IComponent[] = [];
         //private _behaviors:IBehavior[] = [];
 
         private _localMatrix: Matrix4 = Matrix4.identity();
@@ -77,13 +77,14 @@ namespace hyperEngine {
             return undefined;
         }
 
-        /*public addComponent(component:IComponent):void
+        public addComponent(component:IComponent):void
         {
             this._components.push(component);
             component.setOwner(this);
         }
 
-        public addBehavior(behavior:IBehavior):void
+        // TODO
+        /*public addBehavior(behavior:IBehavior):void
         {
             this._behaviors.push(behavior);
             behavior.setOwner(this);
@@ -92,10 +93,10 @@ namespace hyperEngine {
         public load(): void {
             this._isLoaded = true;
 
-            /*for(let c of this._components)
+            for(let c of this._components)
             {
                 c.load();
-            }*/
+            }
 
             for (let c of this._children) {
                 c.load();
@@ -111,11 +112,11 @@ namespace hyperEngine {
                     : undefined
             );
 
-            /*for(let c of this._components)
+            for(let c of this._components)
             {
                 c.update(time);
             }
-
+            /*
             for(let b of this._behaviors)
             {
                 b.update(time);
@@ -127,10 +128,10 @@ namespace hyperEngine {
         }
 
         public render(shader: Shader): void {
-            /*for(let c of this._components)
+            for(let c of this._components)
             {
                 c.render(shader);
-            }*/
+            }
 
             for (let c of this._children) {
                 c.render(shader);

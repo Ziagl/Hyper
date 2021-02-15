@@ -35,6 +35,15 @@ namespace hyperEngine {
             }
         }
 
+        public setFromJson(json: any): void {
+            if (json.x !== undefined) {
+                this._x = Number(json.x);
+            }
+            if (json.y !== undefined) {
+                this._y = Number(json.y);
+            }
+        }
+
         public static get zero(): Vector2 {
             return new Vector2();
         }

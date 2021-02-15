@@ -1,0 +1,30 @@
+{
+    "name":"TestScene",
+    "description":"only for testing purposes",
+    "id":0,
+    "objects":[
+        {
+            "name":"rectangleNode",
+            "transform":{
+                "position":{
+                    "x":10,
+                    "y":10
+                }
+            },
+            "components":[
+                {
+                    "name":"rectangleGeometry",
+                    "type":"rectangle",
+                    "origin":{
+                        "x":0.5,
+                        "y":0.5
+                    },
+                    "size":{
+                        "x":100,
+                        "y":100
+                    }
+                }
+            ]
+        }
+    ]
+}
