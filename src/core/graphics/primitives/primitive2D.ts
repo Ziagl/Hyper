@@ -1,6 +1,5 @@
-namespace hyperEngine{
-    export abstract class Primitive2D
-    {
+namespace hyperEngine {
+    export abstract class Primitive2D {
         protected _width: number;
         protected _height: number;
         protected _origin: Vector3 = Vector3.zero;
@@ -40,7 +39,6 @@ namespace hyperEngine{
 
         public draw(shader: Shader, model: Matrix4): void {
             let modelLocation = shader.getUniformLocation('u_model');
-            model = Matrix4.identity();
             gl.uniformMatrix4fv(modelLocation, false, model.toFloat32Array());
 
             this._buffer.bind();

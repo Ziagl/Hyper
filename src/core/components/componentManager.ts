@@ -10,7 +10,6 @@ namespace hyperEngine {
 
         public static extractComponent(json: any): IComponent {
             if (json.type !== undefined) {
-                console.log('check for type: ' + json.type);
                 if (
                     ComponentManager._registeredBuilders[String(json.type)] !==
                     undefined
