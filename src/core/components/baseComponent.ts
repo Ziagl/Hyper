@@ -21,6 +21,6 @@ namespace hyperEngine {
 
         public update(time: number): void {}
 
-        public render(shader: Shader): void {}
+        public render(): void {}
     }
 }

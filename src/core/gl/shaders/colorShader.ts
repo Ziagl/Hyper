@@ -1,7 +1,8 @@
+///<reference path="shaderManager.ts"/>
 namespace hyperEngine {
     export class ColorShader extends Shader {
         constructor() {
-            super('basic');
+            super('color');
             this.load(this.getVertexSource(), this.getFragmentSource());
         }
 

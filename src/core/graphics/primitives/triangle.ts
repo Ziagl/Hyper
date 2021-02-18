@@ -36,7 +36,7 @@ namespace hyperEngine {
                 // x y z r g b a
                 new Vertex(minX, minY, 0, 0, 0, 1, 0, 0, 1),
                 new Vertex(maxX, minY, 0, 0, 0, 0, 1, 0, 1),
-                new Vertex(maxX / 2, maxY, 0, 0, 0, 0, 0, 1, 1),
+                new Vertex((minX + maxX) * 0.5, maxY, 0, 0, 0, 0, 0, 1, 1),
             ];
 
             for (let v of this._vertices) {

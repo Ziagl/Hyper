@@ -15,6 +15,31 @@
                 {
                     "name":"rectangleGeometry",
                     "type":"rectangle",
+                    "shader":"basic",
+                    "origin":{
+                        "x":0.5,
+                        "y":0.5
+                    },
+                    "size":{
+                        "x":100,
+                        "y":100
+                    }
+                }
+            ]
+        },
+        {
+            "name":"triangleNode",
+            "transform":{
+                "position":{
+                    "x":200,
+                    "y":200
+                }
+            },
+            "components":[
+                {
+                    "name":"triangleGeometry",
+                    "type":"triangle",
+                    "shader":"color",
                     "origin":{
                         "x":0.5,
                         "y":0.5

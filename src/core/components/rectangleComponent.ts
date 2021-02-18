@@ -6,6 +6,7 @@ namespace hyperEngine {
         public name: string;
         public size: Vector2 = Vector2.one;
         public origin: Vector3 = Vector3.zero;
+        public shader: string;
 
         public setFromJson(json: any): void {
             if (json.name !== undefined) {
@@ -16,6 +17,9 @@ namespace hyperEngine {
             }
             if (json.origin !== undefined) {
                 this.origin.setFromJson(json.origin);
+            }
+            if (json.shader !== undefined) {
+                this.shader = String(json.shader);
             }
         }
     }
@@ -34,6 +38,7 @@ namespace hyperEngine {
 
     export class RectangleComponent extends BaseComponent {
         private _rectangle: Rectangle;
+        private _shader: Shader;
 
         constructor(data: RectangleComponentData) {
             super(data);
@@ -42,15 +47,20 @@ namespace hyperEngine {
             if (!data.origin.equals(Vector3.zero)) {
                 this._rectangle.origin.copyFrom(data.origin);
             }
+            this._shader = new BasicShader();
+            if (data.shader !== undefined) {
+                this._shader = ShaderManager.getFromJson(data.shader);
+            }
         }
 
         public load(): void {
             this._rectangle.load();
         }
 
-        public render(shader: Shader): void {
-            this._rectangle.draw(shader, this._owner.worldMatrix);
-            super.render(shader);
+        public render(): void {
+            this._shader.use();
+            this._rectangle.draw(this._shader, this._owner.worldMatrix);
+            super.render();
         }
     }
 

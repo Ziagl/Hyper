@@ -29,6 +29,16 @@ namespace hyperEngine {
          */
         public use(): void {
             gl.useProgram(this._program);
+            
+            // set uniforms
+            let projectionPosition = this.getUniformLocation(
+                'u_projection'
+            );
+            gl.uniformMatrix4fv(
+                projectionPosition,
+                false,
+                new Float32Array(ShaderManager.projectionMatrix.data)
+            );
         }
 
         /**

@@ -127,14 +127,14 @@ namespace hyperEngine {
             }
         }
 
-        public render(shader: Shader): void {
+        public render(): void {
             for(let c of this._components)
             {
-                c.render(shader);
+                c.render();
             }
 
             for (let c of this._children) {
-                c.render(shader);
+                c.render();
             }
         }
 

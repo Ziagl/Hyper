@@ -4,7 +4,6 @@ namespace hyperEngine {
         private _projection: Matrix4;
         private _basicShader: BasicShader;
         private _colorShader: ColorShader;
-        private _scene: Scene;
         private _previousTime: number = 0;
 
         constructor() {
@@ -74,20 +73,8 @@ namespace hyperEngine {
         private draw(): void {
             gl.clear(gl.COLOR_BUFFER_BIT);
 
-            // draw everything with basic shader
-            this._basicShader.use();
-
-            SceneManager.render(this._basicShader);
-
-            // set uniforms
-            let projectionPosition = this._basicShader.getUniformLocation(
-                'u_projection'
-            );
-            gl.uniformMatrix4fv(
-                projectionPosition,
-                false,
-                new Float32Array(this._projection.data)
-            );
+            ShaderManager.projectionMatrix = this._projection;
+            SceneManager.render();
         }
     }
 }

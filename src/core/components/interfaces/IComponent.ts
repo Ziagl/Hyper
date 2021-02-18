@@ -9,6 +9,6 @@ namespace hyperEngine {
 
         update(time: number): void;
 
-        render(shader: Shader): void;
+        render(): void;
     }
 }

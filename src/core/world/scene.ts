@@ -85,10 +85,9 @@ namespace hyperEngine {
 
         /**
          * recursively render all objects in screne graph
-         * @param shader shader to use for all objects
          */
-        public render(shader: Shader): void {
-            this._root.render(shader);
+        public render(): void {
+            this._root.render();
         }
 
         public onActivated(): void {}

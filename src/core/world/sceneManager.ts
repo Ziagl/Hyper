@@ -54,9 +54,9 @@ namespace hyperEngine {
             }
         }
 
-        public static render(shader: Shader): void {
+        public static render(): void {
             if (SceneManager._activeScene !== undefined) {
-                SceneManager._activeScene.render(shader);
+                SceneManager._activeScene.render();
             }
         }
 
