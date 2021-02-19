@@ -15,7 +15,7 @@
                 {
                     "name":"rectangleGeometry",
                     "type":"rectangle",
-                    "shader":"basic",
+                    "shader":"color",
                     "origin":{
                         "x":0.5,
                         "y":0.5
@@ -39,7 +39,7 @@
                 {
                     "name":"triangleGeometry",
                     "type":"triangle",
-                    "shader":"color",
+                    "shader":"basic",
                     "origin":{
                         "x":0.5,
                         "y":0.5

@@ -2,13 +2,19 @@ namespace hyperEngine {
     export abstract class Primitive2D {
         protected _width: number;
         protected _height: number;
+        protected _shaderName: string;
         protected _origin: Vector3 = Vector3.zero;
         protected _buffer: GLBuffer;
         protected _vertices: Vertex[] = [];
 
-        constructor(width: number = 100, height: number = 100) {
+        constructor(
+            width: number = 100,
+            height: number = 100,
+            shaderName: string = 'basic'
+        ) {
             this._width = width;
             this._height = height;
+            this._shaderName = shaderName;
         }
 
         public get origin(): Vector3 {
@@ -31,6 +37,22 @@ namespace hyperEngine {
             positionAttribute.location = 0;
             positionAttribute.size = 3; // x, y, z
             this._buffer.addAttributeLocation(positionAttribute);
+
+            if (this._shaderName == 'color') {
+                // add attributes
+                let colorAttribute = new AttributeInfo();
+                colorAttribute.location = 1;
+                colorAttribute.size = 4; // r, g, b, a
+                this._buffer.addAttributeLocation(colorAttribute);
+            }
+
+            if (this._shaderName == 'texture') {
+                // add attributes
+                let textureAttribute = new AttributeInfo();
+                textureAttribute.location = 1;
+                textureAttribute.size = 2; // u, v
+                this._buffer.addAttributeLocation(textureAttribute);
+            }
 
             this.calculateVertices();
         }

@@ -43,13 +43,13 @@ namespace hyperEngine {
         constructor(data: RectangleComponentData) {
             super(data);
 
-            this._rectangle = new Rectangle(data.size.x, data.size.y);
-            if (!data.origin.equals(Vector3.zero)) {
-                this._rectangle.origin.copyFrom(data.origin);
-            }
             this._shader = new BasicShader();
             if (data.shader !== undefined) {
                 this._shader = ShaderManager.getFromJson(data.shader);
+            }
+            this._rectangle = new Rectangle(data.size.x, data.size.y, this._shader.name);
+            if (!data.origin.equals(Vector3.zero)) {
+                this._rectangle.origin.copyFrom(data.origin);
             }
         }
 

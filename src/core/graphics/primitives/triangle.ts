@@ -1,26 +1,13 @@
 ///<reference path="primitive2D.ts"/>
 namespace hyperEngine {
     export class Triangle extends Primitive2D {
-        constructor(width: number = 100, height: number = 100) {
-            super(width, height);
+        constructor(
+            width: number = 100,
+            height: number = 100,
+            shaderName: string = 'basic'
+        ) {
+            super(width, height, shaderName);
             this.load();
-        }
-
-        public load(): void {
-            this._buffer = new GLBuffer();
-            // add attributes
-            let positionAttribute = new AttributeInfo();
-            positionAttribute.location = 0;
-            positionAttribute.size = 3; // x, y, z
-            this._buffer.addAttributeLocation(positionAttribute);
-
-            // add attributes
-            let colorAttribute = new AttributeInfo();
-            colorAttribute.location = 1;
-            colorAttribute.size = 4; // r, g, b, a
-            this._buffer.addAttributeLocation(colorAttribute);
-
-            this.calculateVertices();
         }
 
         protected calculateVertices(): void {
@@ -31,16 +18,46 @@ namespace hyperEngine {
             let minY = -(this._height * this._origin.y);
             let maxY = this._height * (1.0 - this._origin.y);
 
-            // add vertex data
-            this._vertices = [
-                // x y z r g b a
-                new Vertex(minX, minY, 0, 0, 0, 1, 0, 0, 1),
-                new Vertex(maxX, minY, 0, 0, 0, 0, 1, 0, 1),
-                new Vertex((minX + maxX) * 0.5, maxY, 0, 0, 0, 0, 0, 1, 1),
-            ];
+            switch (this._shaderName) {
+                case 'basic':
+                    // add vertex data
+                    this._vertices = [
+                        // x y z
+                        new Vertex(minX, minY, 0),
+                        new Vertex(maxX, minY, 0),
+                        new Vertex((minX + maxX) * 0.5, maxY, 0),
+                    ];
+                    break;
+                case 'color':
+                    // add vertex data
+                    this._vertices = [
+                        // x y z r g b a
+                        new ColorVertex(minX, minY, 0, 1, 0, 0, 1),
+                        new ColorVertex(maxX, minY, 0, 0, 1, 0, 1),
+                        new ColorVertex(
+                            (minX + maxX) * 0.5,
+                            maxY,
+                            0,
+                            0,
+                            0,
+                            1,
+                            1
+                        ),
+                    ];
+                    break;
+                case 'texture':
+                    // add vertex data
+                    this._vertices = [
+                        // x y z u v
+                        new TextureVertex(minX, minY, 0, 0, 0),
+                        new TextureVertex(maxX, minY, 0, 1, 0),
+                        new TextureVertex((minX + maxX) * 0.5, maxY, 0, 0.5, 1),
+                    ];
+                    break;
+            }
 
             for (let v of this._vertices) {
-                this._buffer.pushBackData(v.toArrayWithColor());
+                this._buffer.pushBackData(v.toArray());
             }
             this._buffer.upload();
             this._buffer.unbind();
@@ -60,7 +77,7 @@ namespace hyperEngine {
 
             this._buffer.clearData();
             for (let v of this._vertices) {
-                this._buffer.pushBackData(v.toArrayWithColor());
+                this._buffer.pushBackData(v.toArray());
             }
             this._buffer.upload();
             this._buffer.unbind();

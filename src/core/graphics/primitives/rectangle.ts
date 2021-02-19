@@ -1,7 +1,11 @@
 namespace hyperEngine {
     export class Rectangle extends Primitive2D {
-        constructor(width: number = 100, height: number = 100) {
-            super(width, height);
+        constructor(
+            width: number = 100,
+            height: number = 100,
+            shaderName: string = 'basic'
+        ) {
+            super(width, height, shaderName);
             this.load();
         }
 
@@ -13,17 +17,47 @@ namespace hyperEngine {
             let minY = -(this._height * this._origin.y);
             let maxY = this._height * (1.0 - this._origin.y);
 
-            // add vertex data
-            this._vertices = [
-                // x y z
-                new Vertex(minX, minY, 0),
-                new Vertex(maxX, minY, 0),
-                new Vertex(minX, maxY, 0),
+            switch (this._shaderName) {
+                case 'basic':
+                    // add vertex data
+                    this._vertices = [
+                        // x y z
+                        new Vertex(minX, minY, 0),
+                        new Vertex(maxX, minY, 0),
+                        new Vertex(minX, maxY, 0),
 
-                new Vertex(minX, maxY, 0),
-                new Vertex(maxX, minY, 0),
-                new Vertex(maxX, maxY, 0),
-            ];
+                        new Vertex(minX, maxY, 0),
+                        new Vertex(maxX, minY, 0),
+                        new Vertex(maxX, maxY, 0),
+                    ];
+                    break;
+                case 'color':
+                    // add vertex data
+                    this._vertices = [
+                        // x y z r g b a
+                        new ColorVertex(minX, minY, 0, 1, 0, 0, 1),
+                        new ColorVertex(maxX, minY, 0, 0, 1, 0, 1),
+                        new ColorVertex(minX, maxY, 0, 0, 0, 1, 1),
+
+                        new ColorVertex(minX, maxY, 0, 0, 0, 1, 1),
+                        new ColorVertex(maxX, minY, 0, 0, 1, 0, 1),
+                        new ColorVertex(maxX, maxY, 0, 1, 0, 0, 1),
+                    ];
+                    break;
+                case 'texture':
+                    // add vertex data
+                    this._vertices = [
+                        // x y z u v
+                        new TextureVertex(minX, minY, 0, 0, 0),
+                        new TextureVertex(maxX, minY, 0, 1, 0),
+                        new TextureVertex(minX, maxY, 0, 0, 1),
+
+                        new TextureVertex(minX, maxY, 0, 0, 1),
+                        new TextureVertex(maxX, minY, 0, 1, 0),
+                        new TextureVertex(maxX, maxY, 0, 1, 1),
+                    ];
+                    break;
+            }
 
             for (let v of this._vertices) {
                 this._buffer.pushBackData(v.toArray());
