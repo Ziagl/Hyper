@@ -1,24 +1,24 @@
 namespace hyperEngine {
-    export class ColorShader extends Shader {
+    export class TextureShader extends Shader {
         constructor() {
-            super('color');
+            super('texture');
             this.load(this.getVertexSource(), this.getFragmentSource());
         }
 
         private getVertexSource(): string {
             return `
 attribute vec3 a_position;
-attribute vec4 a_color;
+attribute vec2 a_texCoord;
 
 uniform mat4 u_projection;
 uniform mat4 u_model;
 
-varying vec4 v_color;
+varying vec2 v_texCoord;
 
 void main() 
 {
     gl_Position = u_projection * u_model * vec4(a_position, 1.0);
-    v_color = a_color;
+    v_texCoord = a_texCoord;
 }`;
         }
 
@@ -26,11 +26,14 @@ void main()
             return `
 precision mediump float;
 
-varying vec4 v_color;
+uniform vec4 u_tint;
+uniform sampler2D u_diffuse;
+
+varying vec2 v_texCoord;
 
 void main()
 {
-    gl_FragColor = v_color;
+    gl_FragColor = u_tint * texture2D(u_diffuse, v_texCoord);
 }
 `;
         }

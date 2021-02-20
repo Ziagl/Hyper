@@ -11,9 +11,8 @@ namespace hyperEngine {
             AssetManager.initialize();
             SceneManager.initialize();
 
-            // load shader
-            this._basicShader = new BasicShader();
-            this._colorShader = new ColorShader();
+            // load materials
+            MaterialManager.registerMaterial(new Material("wooden-box", "assets/textures/wooden-box.jpg", Color.white));
 
             this._projection = Matrix4.orthographic(
                 0,

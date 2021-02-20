@@ -17,6 +17,10 @@ namespace hyperEngine {
             } else {
                 let shader: Shader;
                 switch (name) {
+                    case "texture":
+                        shader = new TextureShader();
+                        ShaderManager.registerShader[name] = shader;
+                        return shader;
                     case 'color':
                         shader = new ColorShader();
                         ShaderManager.registerShader[name] = shader;

@@ -1,5 +1,4 @@
 ///<reference path="shader.ts"/>
-///<reference path="shaderManager.ts"/>
 namespace hyperEngine {
     export class BasicShader extends Shader {
         constructor() {

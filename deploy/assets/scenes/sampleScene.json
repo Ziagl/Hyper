@@ -15,7 +15,7 @@
                 {
                     "name":"rectangleGeometry",
                     "type":"rectangle",
-                    "shader":"color",
+                    "shader":"basic",
                     "origin":{
                         "x":0.5,
                         "y":0.5
@@ -39,7 +39,32 @@
                 {
                     "name":"triangleGeometry",
                     "type":"triangle",
-                    "shader":"basic",
+                    "shader":"color",
+                    "origin":{
+                        "x":0.5,
+                        "y":0.5
+                    },
+                    "size":{
+                        "x":100,
+                        "y":100
+                    }
+                }
+            ]
+        },
+        {
+            "name":"spriteNode",
+            "transform":{
+                "position":{
+                    "x":400,
+                    "y":200
+                }
+            },
+            "components":[
+                {
+                    "name":"spriteGeometry",
+                    "type":"sprite",
+                    "shader":"texture",
+                    "materialName":"wooden-box",
                     "origin":{
                         "x":0.5,
                         "y":0.5
