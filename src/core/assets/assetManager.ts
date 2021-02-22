@@ -11,6 +11,7 @@ namespace hyperEngine {
         public static initialize(): void {
             AssetManager._loaders.push(new ImageAssetLoader());
             AssetManager._loaders.push(new JsonAssetLoader());
+            AssetManager._loaders.push(new TextAssetLoader());
         }
 
         public static registerLoader(loader: IAssetLoader): void {

@@ -75,6 +75,23 @@
                     }
                 }
             ]
+        },
+        {
+            "name":"fontNode",
+            "transform":{
+                "position":{
+                    "x":300,
+                    "y":600
+                }
+            },
+            "components":[
+                {
+                    "name":"fontText",
+                    "type":"bitmapText",
+                    "text":"Test",
+                    "fontName":"default"
+                }
+            ]
         }
     ]
 }
