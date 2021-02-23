@@ -146,7 +146,7 @@ namespace hyperEngine {
                         this._imageWidth = Number(
                             FontUtilities.extractFieldValue(fields[3])
                         );
-                        this._imageWidth = Number(
+                        this._imageHeight = Number(
                             FontUtilities.extractFieldValue(fields[4])
                         );
                         break;

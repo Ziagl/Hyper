@@ -103,17 +103,17 @@ namespace hyperEngine {
             for (let c of this._text) {
                 if (c === '\n') {
                     x = 0;
-                    y += this._bitmapFont.size;
+                    y -= this._bitmapFont.size;
                     continue;
                 }
 
                 let g = this._bitmapFont.getGlyph(c);
 
                 let minX = x + g.xOffset;
-                let minY = y + g.yOffset;
+                let minY = y - g.yOffset;
 
                 let maxX = minX + g.width;
-                let maxY = minY + g.height;
+                let maxY = minY - g.height;
 
                 let minU = g.x / this._bitmapFont.imageWidth;
                 let minV = g.y / this._bitmapFont.imageHeight;
@@ -125,19 +125,19 @@ namespace hyperEngine {
                     new TextureVertex(minX, minY, 0, minU, minV)
                 );
                 this._vertices.push(
-                    new TextureVertex(minX, maxY, 0, minU, maxV)
-                );
-                this._vertices.push(
-                    new TextureVertex(maxX, maxY, 0, maxU, maxV)
-                );
-                this._vertices.push(
-                    new TextureVertex(maxX, maxY, 0, maxU, maxV)
-                );
-                this._vertices.push(
                     new TextureVertex(maxX, minY, 0, maxU, minV)
                 );
                 this._vertices.push(
+                    new TextureVertex(maxX, maxY, 0, maxU, maxV)
+                );
+                this._vertices.push(
                     new TextureVertex(minX, minY, 0, minU, minV)
+                );
+                this._vertices.push(
+                    new TextureVertex(maxX, maxY, 0, maxU, maxV)
+                );
+                this._vertices.push(
+                    new TextureVertex(minX, maxY, 0, minU, maxV)
                 );
 
                 x += g.xAdvance;

@@ -1,43 +1,35 @@
-namespace hyperEngine
-{
-    export class BitmapFontManager{
-        private static _fonts:{[name:string]:BitmapFont} = {};
+namespace hyperEngine {
+    export class BitmapFontManager {
+        private static _fonts: { [name: string]: BitmapFont } = {};
 
-        public static addFont(name:string, fontFileName:string):void{
+        public static addFont(name: string, fontFileName: string): void {
             BitmapFontManager._fonts[name] = new BitmapFont(name, fontFileName);
         }
 
-        public static getFont(name:string):BitmapFont{
-            if(BitmapFontManager._fonts[name] === undefined)
-            {
-                throw new Error("Font named "+name+"does not exists.");
-
+        public static getFont(name: string): BitmapFont {
+            if (BitmapFontManager._fonts[name] === undefined) {
+                throw new Error('Font named ' + name + 'does not exists.');
             }
 
             return BitmapFontManager._fonts[name];
         }
 
-        public static load():void{
+        public static load(): void {
             let keys = Object.keys(BitmapFontManager._fonts);
-            for(let key of keys)
-            {
+            for (let key of keys) {
                 BitmapFontManager._fonts[key].load();
             }
         }
 
-        public static updateReady():boolean{
+        public static updateReady(): boolean {
             let keys = Object.keys(BitmapFontManager._fonts);
-            for(let key of keys)
-            {
-                if(!BitmapFontManager._fonts[key].isLoaded)
-                {
-                    console.debug("Font "+key+" is still loading...");
+            for (let key of keys) {
+                if (!BitmapFontManager._fonts[key].isLoaded) {
+                    console.debug('Font ' + key + ' is still loading...');
                     return false;
                 }
-
-
             }
-            console.debug("All fonts are loaded.");
+            console.debug('All fonts are loaded.');
             return true;
         }
     }
