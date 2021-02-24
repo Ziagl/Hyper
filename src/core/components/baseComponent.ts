@@ -1,26 +1,28 @@
-namespace hyperEngine {
-    export abstract class BaseComponent implements IComponent {
-        protected _owner: Entity;
-        protected _data: IComponentData;
-        public name: string;
+import {IComponent} from "./interfaces/IComponent"
+import {IComponentData} from "./interfaces/IComponentData"
+import {Entity} from "../world/entity"
 
-        constructor(data: IComponentData) {
-            this._data = data;
-            this.name = data.name;
-        }
+export abstract class BaseComponent implements IComponent {
+    protected _owner: Entity;
+    protected _data: IComponentData;
+    public name: string;
 
-        public get owner(): Entity {
-            return this._owner;
-        }
-
-        public setOwner(owner: Entity): void {
-            this._owner = owner;
-        }
-
-        public load(): void {}
-
-        public update(time: number): void {}
-
-        public render(): void {}
+    constructor(data: IComponentData) {
+        this._data = data;
+        this.name = data.name;
     }
+
+    public get owner(): Entity {
+        return this._owner;
+    }
+
+    public setOwner(owner: Entity): void {
+        this._owner = owner;
+    }
+
+    public load(): void {}
+
+    public update(time: number): void {}
+
+    public render(): void {}
 }

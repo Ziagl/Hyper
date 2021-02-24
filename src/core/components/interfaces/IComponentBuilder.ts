@@ -1,7 +1,7 @@
-namespace hyperEngine {
-    export interface IComponentBuilder {
-        readonly type: string;
+import { IComponent } from './IComponent';
 
-        buildFromJson(json: any): IComponent;
-    }
+export interface IComponentBuilder {
+    readonly type: string;
+
+    buildFromJson(json: any): IComponent;
 }

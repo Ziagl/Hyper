@@ -1,4 +1,4 @@
-namespace hyperEngine {
+
     export class Vector3 {
         private _x: number;
         private _y: number;
@@ -137,4 +137,3 @@ namespace hyperEngine {
         }
         //#endregion
     }
-}

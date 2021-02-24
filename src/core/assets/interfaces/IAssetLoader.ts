@@ -1,7 +1,5 @@
-namespace hyperEngine {
-    export interface IAssetLoader {
-        readonly supportedExtensions: string[];
+export interface IAssetLoader {
+    readonly supportedExtensions: string[];
 
-        loadAsset(assetName: string): void;
-    }
+    loadAsset(assetName: string): void;
 }

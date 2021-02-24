@@ -1,11 +1,11 @@
-var engine: hyperEngine.Engine;
+import { Engine } from './core/engine';
+var engine: Engine;
 
 // entry point of application
 window.onload = () => {
-    engine = new hyperEngine.Engine();
-    //engine.start();
+    engine = new Engine();
 };
 
 window.onresize = () => {
     engine.resize();
-}
+};

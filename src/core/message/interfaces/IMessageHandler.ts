@@ -1,5 +1,5 @@
-namespace hyperEngine {
-    export interface IMessageHandler {
-        onMessage(message: Message): void;
-    }
+import {Message} from "../message"
+
+export interface IMessageHandler {
+    onMessage(message: Message): void;
 }

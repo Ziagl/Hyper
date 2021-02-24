@@ -1,28 +1,29 @@
-namespace hyperEngine {
-    export class ComponentManager {
-        private static _registeredBuilders: {
-            [type: string]: IComponentBuilder;
-        } = {};
+import {IComponent} from "./interfaces/IComponent"
+import {IComponentBuilder} from "./interfaces/IComponentBuilder"
 
-        public static registerBuilder(builder: IComponentBuilder): void {
-            ComponentManager._registeredBuilders[builder.type] = builder;
-        }
+export class ComponentManager {
+    private static _registeredBuilders: {
+        [type: string]: IComponentBuilder;
+    } = {};
 
-        public static extractComponent(json: any): IComponent {
-            if (json.type !== undefined) {
-                if (
-                    ComponentManager._registeredBuilders[String(json.type)] !==
-                    undefined
-                ) {
-                    return ComponentManager._registeredBuilders[
-                        String(json.type)
-                    ].buildFromJson(json);
-                }
+    public static registerBuilder(builder: IComponentBuilder): void {
+        ComponentManager._registeredBuilders[builder.type] = builder;
+    }
 
-                throw new Error(
-                    'Component manager error - type is missing or builder is not registered for this type.'
-                );
+    public static extractComponent(json: any): IComponent {
+        if (json.type !== undefined) {
+            if (
+                ComponentManager._registeredBuilders[String(json.type)] !==
+                undefined
+            ) {
+                return ComponentManager._registeredBuilders[
+                    String(json.type)
+                ].buildFromJson(json);
             }
+
+            throw new Error(
+                'Component manager error - type is missing or builder is not registered for this type.'
+            );
         }
     }
 }

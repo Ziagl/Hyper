@@ -9,7 +9,16 @@
             "request": "launch",
             "name": "Launch Chrome against localhost",
             "url": "http://localhost:8080",
-            "webRoot": "${workspaceFolder}"
+            "webRoot": "${workspaceFolder}",
+            "sourceMaps":true,
+            "trace":true,
+            "sourceMapPathOverrides": {
+                "webpack://hyper/./*": "${webRoot}/*",
+                "webpack://hyper/src/*": "${webRoot}/*",
+                "webpack://hyper/*": "*",
+                "webpack://hyper/./~/*": "${webRoot}/node_modules/*",
+                "meteor://💻app/*": "${webRoot}/*"
+            }
         }
     ]
 }

@@ -1,14 +1,14 @@
-namespace hyperEngine {
-    export interface IComponent {
-        name: string;
-        readonly owner: Entity;
+import { Entity } from '../../world/entity';
 
-        setOwner(owner: Entity): void;
+export interface IComponent {
+    name: string;
+    readonly owner: Entity;
 
-        load(): void;
+    setOwner(owner: Entity): void;
 
-        update(time: number): void;
+    load(): void;
 
-        render(): void;
-    }
+    update(time: number): void;
+
+    render(): void;
 }
